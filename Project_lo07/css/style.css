@@ -1,0 +1,1079 @@
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family:'Lato-Light';
+    background-color: #d5e0cf;
+    color: #0000;
+    -webkit-font-smoothing:antialiased;
+    -webkit-overflow-scrolling:touch
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family:'Roboto';
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1.1em;
+    letter-spacing: .07em;
+    margin-bottom: 0;
+    color:#fff;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    filter: dropshadow(color=#3c332d, offx=0, offy=2);
+}
+p {
+    font-family:'Lora';
+    /*text-align: justify;*/
+    /*margin: 0 0 25px;*/
+    text-decoration: none;
+    padding-top: 25px;
+    margin-bottom: 25px;
+    font-size: 18px;
+    line-height: 28px;
+    color: #163042;
+    font-weight: lighter;
+    display: block;
+    letter-spacing: 0;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    filter: dropshadow(color=#3c332d, offx=0, offy=2);
+}
+img {
+    vertical-align:middle
+}
+@media(min-width:767px) {
+    p {
+        margin: 0 0 10px;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+    h1, h2, h3, h4, h5, h6{
+        font-size: 50px;
+    }
+}
+/*a {
+    color: #28c3ab;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}*/
+/*Les liens en général*/
+a:hover, a:focus {
+    text-decoration: none;
+    color: #176e61;
+}
+/*La barre de navigation en mode mobile*/
+.navbar {
+    height: 1em;
+    margin-bottom: 0;
+    /*border-bottom: 1px solid rgba(0, 0, 0, .2);*/
+    /*text-transform: uppercase;*/
+    font-family:'Signika', sans-serif, Lobster, Arial;
+    background-color: #dadada;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.navbar-brand:focus {
+    outline: 0;
+}
+/*Les liens de la navbar*/
+.navbar-custom a {
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    color: #fff;
+    font-size: 20px;
+    /*font-weight: 900;*/
+    /*font-weight: lighter;*/
+    /*text-transform: uppercase;*/
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+/*@media (min-width: 768px) {
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}*/
+/*transition au passage de la souris sur les liens de la navbar*/
+.navbar-custom .nav li a {
+    -webkit-transition: background .1s ease-in-out;
+    -moz-transition: background .1s ease-in-out;
+    transition: background .1s ease-in-out;
+}
+.navbar-custom .nav li {
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+}
+/*effet au passage de la souris sur les liens de la navbar*/
+.navbar-custom .nav li a:hover, .navbar-custom .nav li a:focus, .navbar-custom .ncolori.active {
+    outline: 0;
+    color: #5fcb00;
+    background-color: rgba(0, 0, 0, 0);
+}
+/*à déterminer*/
+.navbar-toggle {
+    padding: 4px 6px;
+    font-size: 16px;
+    color: #fff;
+}
+.navbar-toggle:focus, .navbar-toggle:active {
+    outline: 0;
+}
+/*propriété de la navbar en desktop*/
+@media(min-width:767px) {
+    .navbar {
+        /*margin-bottom: 20px;*/
+        padding: 0 0;
+        border-bottom: 0;
+        /*letter-spacing: 1px;*/
+        background: rgba(37, 49, 57, 0.5) 0;
+        -webkit-transition: background 1s ease-in-out, padding .5s ease-in-out;
+        -moz-transition: background 1s ease-in-out, padding .5s ease-in-out;
+        transition: background 1s ease-in-out, padding .5s ease-in-out;
+    }
+    .top-nav-collapse {
+        padding: 0;
+        /*background: #253139;*/
+        background: rgba(37, 49, 57, 0.15);
+    }
+    .navbar-custom .top-nav-collapse {
+        /*border-bottom: 1px solid rgba(255, 255, 255, 0.5);*/
+    }
+}
+@media(max-width:767px){
+    .menu-custom {
+        background: rgb(37, 49, 57);
+        margin-top: -50px;
+        float: right;
+        padding-left: 7%;
+        width: 50%;
+    }}
+/*corps de la page*/
+.intro {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 100px 0;
+    color: #fff;
+    /*background: url(../img/header3.jpg) no-repeat bottom center scroll;*/
+    background-color: #000;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+.intro-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+.brand-heading {
+    font-size: 40px;
+}
+@media(min-width:767px) {
+    .intro {
+        height: 100%;
+        padding: 0;
+    }
+    .brand-heading {
+        font-size: 80px;
+    }
+}
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+    padding: 7px 16px;
+    border: 2px solid #fff;
+    border-radius: 35px;
+    font-size: 40px;
+    color: #fff;
+    background: 0 0;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+}
+.btn-circle:hover, .btn-circle:focus {
+    outline: 0;
+    color: #fff;
+    background: rgba(255, 255, 255, .1);
+}
+.page-scroll .btn-circle i.animated {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+.page-scroll .btn-circle:hover i.animated {
+    -webkit-animation-name: pulse;
+    -moz-animation-name: pulse;
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+}
+@-webkit-keyframes pulse {
+0 {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+}
+@-moz-keyframes pulse {
+0 {
+    -moz-transform: scale(1);
+    transform: scale(1);
+}
+50% {
+    -moz-transform: scale(1.2);
+    transform: scale(1.2);
+}
+100% {
+    -moz-transform: scale(1);
+    transform: scale(1);
+}
+}
+.content-section {
+    /*padding-top: 10%;*/
+    /*padding-bottom: 10%;*/
+    height: 100%;
+}
+@media(min-width:767px) {
+    .content-section {
+        /*padding-top: 100px;*/
+        /*padding-bottom: 5%;*/
+    }
+}
+.btn {
+    text-transform: uppercase;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.btn-default {
+    border: 1px solid #28c3ab;
+    color: #28c3ab;
+    background-color: transparent;
+}
+.btn-default:hover, .btn-default:focus {
+    border: 1px solid #28c3ab;
+    outline: 0;
+    color: #000;
+    background-color: #28c3ab;
+}
+.btn-huge {
+    padding: 25px;
+    font-size: 26px;
+}
+.banner-social-buttons {
+    margin-top: 0;
+}
+@media(max-width:1199px) {
+    ul.banner-social-buttons {
+        margin-top: 15px;
+    }
+}
+@media(max-width:767px) {
+    ul.banner-social-buttons>li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+    ul.banner-social-buttons>li:last-child {
+        margin-bottom: 0;
+    }
+}
+::-moz-selection {
+    text-shadow: none;
+    background: #16a085;
+    color: #a4003a;
+}
+::selection {
+    text-shadow: none;
+    background: #16a085;
+    color: #a4003a;
+}
+img::selection {
+    background: 0 0;
+}
+img::-moz-selection {
+    background: 0 0;
+}
+body {
+    webkit-tap-highlight-color: rgba(255, 255, 255, .2);
+}
+/*------ Custom------*/
+.navbar-custom .navbar .navbar-brand img {
+    height: 90%;
+    margin-top: 5%;
+    /*display: block;*/
+    /*margin: auto auto;*/
+    /*vertical-align: middle;*/
+    /*background-color: rgba(22, 160, 133, 1);*/
+}
+.navbar-custom .navbar .navbar-brand {
+    padding: 0;
+    background-color: rgba(245, 245, 245, 1);
+    width: 100px;
+    height: 100px;
+    /*padding-top: 4px;*/
+    margin-left: 0;
+    margin-right: 1px;
+    text-align: center;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+.vertical-line {
+    border-right: 2px solid #54360b;
+    font-weight: 600;
+    /*height: 100%;*/
+}
+#about em {
+    color: #578201;
+}
+#about h3 {
+    color: #54360b;
+}
+#about p {
+    color: #737c85;
+}
+#about ul {
+    /*margin: 0 0 25px;*/
+    font-size: 16px;
+    /*line-height: 1.5;*/
+    color: #737c85;
+    /*font-weight: 500;*/
+}
+.section-divider {
+    z-index:999;
+    width:100%;
+    display:table;
+    max-height:450px;
+    border-bottom:2px solid #E6EAED;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+    padding-top:30px;
+    padding-bottom:70px;
+    margin-top:45px;
+    background-position:center center;
+    -webkit-background-size:100%;
+    -moz-background-size:100%;
+    -o-background-size:100%;
+    background-size:100%;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+    background-attachment:relative;
+    text-align:center;
+    /*background: rgba(255, 255, 255, 0.5);*/
+}
+.textdivider h2 {
+    padding-top:60px;
+    color:#fff;
+    font-size:50px
+}
+.textdivider p {
+    color:#fff;
+    font-size:30px;
+}
+.textdivider h2:after {
+    background-color: #ccc;
+    /*display: block;*/
+    position: absolute;
+    content:"";
+    width: 50%;
+    height: 2px;
+    left: 25%;
+    margin-top: 70px;
+}
+.divider1 {
+    /*background-color: rgba(255, 255, 255, 0.5);*/
+    background-position: center bottom;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    filter: sepia(0.3);
+    -webkit-filter: sepia(0.2);
+    -moz-filter: sepia(0.3);
+    -ms-filter: sepia(0.3);
+    -o-filter: sepia(0.3);
+}
+.ombrage {
+    -moz-box-shadow: 2px 2px 3px #000;
+    -webkit-box-shadow: 2px 2px 3px #000;
+    box-shadow: 2px 2px 3px #000;
+}
+#team {
+    padding-bottom: 10%;
+}
+#footer-custom {
+    background:#2b2b2b;
+
+    border-bottom:1px solid #ddd;
+    text-align:center
+
+}
+#footer-custom h4 {
+    color:#fff
+}
+.centered {
+    display: table-cell;
+    vertical-align: middle;
+}
+#intro-custom {
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}/*
+#intro-custom .intro-custom-content {
+    display: table-cell;
+    vertical-align: middle;
+    height: 300px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fff
+}*/
+#intro-custom .intro-custom-content .content {
+    height: 100vh;
+    line-height: 100vh;
+    width: 100%;
+    text-align: center;
+}
+
+#intro-custom .intro-custom-content article img {
+    float: right;
+    max-height: 35%;
+    margin-top: -5%;
+    margin-right: 0;
+    margin-left: 3%;
+}
+#intro-custom .intro-custom-content aside img {
+    width: 100%;
+    /*height: 450px;*/
+}
+#intro-custom .intro-custom-content .illust {
+    /*clear: none;*/
+    float: right;
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-top: 10%;
+    width: 35%
+}
+#intro-custom .intro-custom-content .frame {
+    border: solid 11px #fff;
+}
+/*#intro h1 {
+    color:#fff;
+    margin-top:90px;
+    padding-bottom:30px;
+    letter-spacing:8px;
+    font-size:100px;
+    font-weight:700;
+    text-shadow:2px 2px 2px #000
+}*/
+
+/*#intro p {
+    color:#fff;
+    font-size:40px;
+    font-weight:400;
+    text-align:center;
+    line-height:40px;
+    letter-spacing:3px;
+    margin-left:15px;
+    text-shadow:1px 1px 1px #000
+}*/
+.soon {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    font-family:'Montserrat';
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 9%;
+    margin-left: 20px;
+    padding: 10px;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+;
+
+/*new site css*/
+.content{
+    height: 100vh;
+    line-height: 100vh;
+    width: 100%;
+    text-align: center;
+}
+.content h1  {
+    margin: 0;
+    font-size: 60px ! important;
+    font-weight: bold;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0;
+    height: 100vh;
+    line-height: 100vh;
+    width: 100%;
+}
+
+.content p  {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0;
+    width: 100%;
+    margin-top:13%;
+    color: white;
+}
+.content span {
+    margin: 0;
+    font-size: 70px !important;
+    font-weight: bold;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0;
+    height: 100vh;
+    line-height: 100vh;
+    width: 100%;
+}
+.bande_info{
+    width:100%;
+    background-color:rgba(0,0,0,0.82);
+}
+
+.bande_info p
+{
+    /*padding-left: 7%;*/
+    text-align: center;
+    font-size: 3em;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    color:#54360b;
+}
+
+.bande_info span
+{
+    font-style: italic;
+    color: #5fcb00;
+}
+
+/*.bande_info_deux{
+    width:100%;
+    background-color:rgba(0,0,0,0.82);
+}
+
+.bande_info_deux p
+{
+    padding-left: 7%;
+    text-align: center;
+    font-size: 3em;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    color:#54360b;
+}*/
+
+#photo-about-asso {
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#photo-about-asso .intro-custom-content .content {
+    height: 100vh;
+    line-height: 100vh;
+    width: 100%;
+    text-align: center;
+}
+#potager_biologique {
+    width: 100%;
+    height: 50vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#potager_biologique .intro-custom-content .content {
+    width: 100%;
+    text-align: center;
+}
+
+.content_deux span {
+    font-size: 70px;
+}
+.content_deux p  {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0;
+    width: 100%;
+    margin-top: 5%;
+    color: white;
+}
+
+.submit{
+    font-size: 1.1em;
+    background-color:#54360b ;
+    color: #5fcb00;
+}
+.btn-primary{
+    border-color: transparent !important;
+}
+.btn-primary:hover{
+    background-color: #5fcb00;
+}
+
+
+
+.projet_potager p
+{
+    text-align: center;
+    font-size: 2em;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    color:#54360b;
+}
+.content_trois p{
+    margin: 0;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0;
+    font-size: 70px;
+    width: 100%;
+    color: #54360b;
+    margin-top: 7%;
+    text-align: center;
+    font-weight: bold;
+
+}
+.content_footer h1{
+    margin: 0;
+    font-size: 50px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0;
+    width: 100%;
+    color: white;
+    margin-top: 7%;
+    text-align: center;
+    font-weight: bold;
+
+}
+.content_footer p{
+    margin: 0;
+    font-size: 40px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+.content_footer a{
+    color:#5fcb00;
+}
+
+@media (max-width: 1280px){
+    .container{
+        width:100%;
+    }
+}
+@media (max-width: 1024px){
+    .container{
+        width:100%;
+    }
+}
+@media (max-width: 992px){
+    .container{
+        width:100%;
+    }
+}
+@media (max-width: 768px){
+    .container{
+        width:100%;
+    }
+}
+@media (max-width: 575px){
+    .container{
+        width:100%;
+    }
+}
+@media (max-width: 1280px) and (orientation:landscape) {
+
+    #intro-custom h1 {
+        font-size: 50px !important;
+    }
+    #intro-custom span {
+        font-size: 58px !important;
+    }
+    #photo-about-asso p {
+        font-size: 25px;
+    }
+    #potager_biologique p {
+        font-size: 25px;
+    }
+    #potager_biologique span {
+        font-size: 40px;
+    }
+    .bande_info p {
+        font-size: 3em;
+    }
+    .section-content h1{
+        font-size: 53px;
+    }
+    .section-content span{
+        font-size: 53px;
+    }
+    #Contact{
+        height: 70vh !important ;
+    }
+    .content_trois p{
+        font-size: 53px;
+    }
+}
+@media (max-width: 1280px) and (orientation:portrait) {
+
+
+    #photo-about-asso p {
+        font-size: 36px;
+    }
+    .content p{
+        margin-top: 20%;
+    }
+    #potager_biologique p {
+        font-size: 28px;
+    }
+    #potager_biologique span {
+        font-size: 70px;
+    }
+    .bande_info p {
+        font-size: 3em;
+    }
+    .section-content h1{
+        font-size: 53px;
+    }
+    .section-content span{
+        font-size: 53px;
+    }
+    #Contact{
+        height: 70vh !important ;
+    }
+    .content_trois p{
+        font-size: 70px;
+    }
+}
+
+
+
+@media (max-width: 992px) and (orientation:landscape) {
+
+    #intro-custom h1 {
+        font-size: 45px !important;
+    }
+    #intro-custom span {
+        font-size: 53px !important;
+    }
+    #photo-about-asso p {
+        font-size: 20px;
+    }
+    #potager_biologique p {
+        font-size: 20px;
+    }
+    #potager_biologique span {
+        font-size: 40px;
+    }
+    .bande_info p {
+        font-size: 3em;
+    }
+    .section-content h1{
+        font-size: 53px;
+    }
+    .section-content span{
+        font-size: 53px;
+    }
+    #Contact{
+        height: 70vh !important ;
+    }
+    .content_trois p{
+        font-size: 53px;
+    }
+}
+@media (max-width: 992px) and (orientation:portrait) {
+
+
+    #photo-about-asso p {
+        font-size: 32px;
+    }
+    .content p{
+        margin-top: 20%;
+        font-size: 28px !important;
+    }
+    #potager_biologique p {
+        font-size: 28px;
+    }
+    #potager_biologique span {
+        font-size: 70px;
+    }
+    .bande_info p {
+        font-size: 3em;
+    }
+    .section-content h1{
+        font-size: 53px;
+    }
+    .section-content span{
+        font-size: 53px;
+    }
+    #Contact{
+        height: 70vh !important ;
+
+    }
+    .content_trois p{
+        font-size: 53px;
+    }
+}
+
+@media (max-width: 768px) and (orientation:portrait) {
+    #intro-custom h1 {
+        font-size: 50px !important;
+    }
+    #intro-custom span {
+        font-size: 58px !important;
+    }
+    .section-content h1{
+        font-size: 30px;
+    }
+    .section-content span{
+        font-size: 30px;
+    }
+
+    #photo-about-asso p {
+        font-size: 25px;
+    }
+    #potager_biologique p {
+        font-size: 19px;
+    }
+    #potager_biologique span {
+        font-size: 35px;
+    }
+    .content_deux{
+        margin-top: 20%;
+    }
+    .bande_info p {
+        font-size: 2em;
+    }
+    #Contact{
+        height: 100vh !important ;
+    }
+    .content_trois p{
+        font-size: 53px;
+    }
+    .content_footer h1{
+        font-size: 35px;
+    }
+    .content_footer p{
+        font-size: 19px
+    }
+}
+
+
+@media (max-width: 768px) and (orientation:landscape){
+    #intro-custom h1 {
+        font-size: 45px !important;
+    }
+    #intro-custom span {
+        font-size: 53px !important;
+    }
+    .section-content h1{
+        font-size: 30px;
+    }
+    .section-content span{
+        font-size: 30px;
+    }
+
+    #photo-about-asso p {
+        font-size: 20px;
+    }
+    #potager_biologique p {
+        font-size: 19px;
+    }
+    #potager_biologique span {
+        font-size: 35px;
+    }
+
+    .bande_info p {
+        font-size: 2em;
+    }
+    #Contact{
+        height: 100vh !important ;
+    }
+    .content_trois p{
+        font-size: 53px;
+    }
+    .content_footer h1{
+        font-size: 35px;
+    }
+    .content_footer p{
+        font-size: 19px
+    }
+}
+
+
+@media (max-width: 601px) {
+    #intro-custom h1 {
+        font-size: 30px !important;
+    }
+    .section-content h1{
+        font-size: 30px;
+    }
+    .section-content span{
+        font-size: 30px;
+    }
+    #intro-custom span {
+        font-size: 47px !important;
+    }
+    #photo-about-asso p {
+        font-size: 12px;
+    }
+    .content p:nth-child(1){
+        margin-top: 18% !important;
+    }
+
+    #potager_biologique p {
+        font-size: 12px;
+    }
+    #potager_biologique span {
+        font-size: 20px;
+    }
+    .bande_info p {
+        font-size: 2em;
+    }
+    #Contact{
+        height: 100vh !important ;
+    }
+    .content_trois p{
+        font-size: 35px;
+    }
+    .content_footer h1{
+        font-size: 35px;
+    }
+    .content_footer p{
+        font-size: 19px
+    }
+    .content p{
+        font-size: 23px !important;
+    }
+    .content_deux p{
+        font-size: 24px !important;
+    }
+    .content_deux span{
+        font-size: 40px !important;
+    }
+}
+
+@media (max-width: 566px) {
+    .content p{
+        font-size: 18px !important;
+    }
+    .content_deux p{
+        font-size: 17px !important;
+    }
+}
+
+@media (max-width: 527px) {
+    .content_trois p{
+        font-size: 30px;
+    }
+
+    .projet_potager img{
+        width: 250px !important;
+    }
+}
+@media (max-width: 422px) {
+    .content p{
+        font-size: 10px !important;
+    }
+    .content_deux p{
+        font-size: 15px !important;
+    }
+}
+
+
+/*Contact sectiom*/
+.content-header{
+    font-family: 'Oleo Script', cursive;
+    color:#5fcb00;
+    font-size: 45px;
+}
+
+.section-content{
+    text-align: center;
+}
+.section-content{
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+
+#contact{
+
+    font-family: 'Teko', sans-serif;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color : #fff;
+}
+.contact-section{
+    padding-top: 40px;
+}
+
+
+
+.form-group{
+    margin-top: 10px;
+}
+label{
+    font-size: 1.3em;
+    line-height: 1em;
+    font-weight: normal;
+}
+.form-control{
+    font-size: 1.3em;
+    color: #080808;
+}
+textarea.form-control {
+    height: 135px;
+    /* margin-top: px;*/
+}
+@media (min-width: 993px) {
+    .submit{
+        float: right;
+    }
+}
+
