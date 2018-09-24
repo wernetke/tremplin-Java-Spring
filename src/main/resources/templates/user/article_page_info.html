@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>User Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<nav class="navbar navbar-fixed-top navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" th:href="@{/index}"><img
+				src="https://i.pinimg.com/originals/5e/b9/24/5eb924aee830d769dff1ad0997a99d25.gif"
+				width="100"></a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right"
+				style="padding: 10px; text-decoration: none; font-size: 1.5em;">
+
+
+				<li><div class="style" sec:authorize="hasAuthority('ADMIN')">
+						<a  th:href="@{/admin/article}" id="create_article">Create
+							article</a> 
+							<a th:href="@{/admin/article_list}" id="modifier_article">Edit
+							article</a> 
+							<a th:href="@{/admin/category}" id="create_category">Create
+							category</a> 
+							<a th:href="@{/admin/category_list}"
+							id="create_category">Edit category</a>
+					</div></li>
+				<li><div sec:authorize="isAuthenticated()">
+						<a class="btn btn-success" th:href="@{/dashboard}">Dashboard</a> <a
+							class="btn btn-danger" th:href="@{/logout}">Logout</a>
+					</div></li>
+				<li><div sec:authorize="isAnonymous()">
+						<a class="btn btn-success" th:href="@{/login}">Login</a> <a
+							class="btn btn-primary" th:href="@{/registration}">Register</a>
+					</div></li>
+
+				<li><form class="form-inline" th:action="@{/search}"
+						method="get">
+						<input class="form-control mr-sm-2" type="search"
+							name="title_search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form></li>
+			</ul>
+		</div>
+		<!-- /.nav-collapse -->
+	</div>
+	<!-- /.container -->
+</nav>
+<!-- /.navbar -->
+
+
+<div class="container-fluid" style="padding: 15px">
+	<div class="row row-offcanvas row-offcanvas-right">
+		<div class="col-xs-12 col-sm-9 col-sm-push-3">
+
+
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 ">
+
+					<h2 align="center" style="font-size: 2.5em; font-weight: bold;">
+					</h2>
+
+					<div
+						
+						th:text="${article.tag}+ ' ' + ${article.category.name}"
+						class="style_div_title" ></div>
+					<h1 style="text-align: center; font-size: 3em; font-weight: bold;"
+						th:text="${article.title}" /></h1>
+					<div align="center">
+						<img th:src="${article.url}" width="300" style="padding: 15px"><br />
+					</div>
+
+
+					<h2 style="text-align: center; font-size: 1.5em;"
+						th:text="${article.text}" /></h2>
+					 <div th:text="Commentaries" class="style_div_title" ></div>
+					 					 
+
+					<th:block th:each="com : ${comments}">
+
+						<h3 th:if="${com.author != null}"
+							th:text="${com.author.name} + ' - ' + ${{com.creationDate}}"
+							style="font-size: 1.5em; text-decoration: none; cursor: pointer;"></h3>
+						<div th:if="${com.author != null}" th:text="${com.description}"
+							class="form-control" ></div>
+
+						<h3 th:if="${com.author == null}"
+							th:text="'Anonyme - ' + ${{com.creationDate}}"
+							style="font-size: 1.5em; text-decoration: none; cursor: pointer;"></h3>
+						<div th:if="${com.author == null}" th:text="${com.description}"
+							class="form-control" ></div>
+							
+						<div sec:authorize="hasAuthority('ADMIN')" align="center">
+						</br>
+						<a class="btn btn-danger"th:href="@{'/deleteComment?id_comment=' + ${com.id} + '&id=' + ${article.id}}">Delete</a> 
+						</div>	
+
+					</th:block>
+					<form autocomplete="off" th:action="@{/commentArticle}"
+						th:object="${comment}" method="get" class="form-horizontal"
+						role="form" style="cursor: pointer">
+						</br>
+						<textarea type="text" th:field="*{description}"
+							placeholder="Commentary" class="form-control" maxlength="1000"></textarea>
+						<div th:name="id" th:value="${article.id}"
+							th:type="hidden"></div></br>
+
+
+
+
+						<div class="col-md-6 col-md-offset-3 ">
+							<button class="btn btn-lg btn-primary btn-block" name="Comment"
+								value="Comment" type="Submit" th:text="Comment"></button>
+						</div>
+					</form>
+					<span th:utext="${successMessage}"></span>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas"
+			id="sidebar">
+			<div class="list-group">
+				<div  class="list-group-item active">Category</div> 
+				<th:block th:each="cat : ${categories}">
+					<a class="list-group-item"
+						th:href="@{'/afficheFilterCat?filter_id=' + ${cat.id}}"
+						th:text="${cat.name}"></a>
+				</th:block>
+			</div>
+		</div>
+
+	</div>
+
+
+</div>
