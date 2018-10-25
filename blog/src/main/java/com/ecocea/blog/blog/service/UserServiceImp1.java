@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.ecocea.blog.blog.repository.RoleRepository;
 import com.ecocea.blog.blog.repository.UserRepository;
 import com.ecocea.blog.blog.entity.User;
-import com.ecocea.blog.blog.entity.Category;
 import com.ecocea.blog.blog.entity.Role;
 
 
@@ -39,4 +38,10 @@ public class UserServiceImp1 implements UserService {
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
 	}
+    
+    @Override
+    public User findByConfirmationToken(String confirmationToken) {
+		return userRepository.findByConfirmationToken(confirmationToken);
+	}
+    
 }

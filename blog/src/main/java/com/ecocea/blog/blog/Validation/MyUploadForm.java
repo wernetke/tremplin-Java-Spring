@@ -1,4 +1,4 @@
-package com.ecocea.blog.blog.form;
+package com.ecocea.blog.blog.Validation;
 
 import org.springframework.web.multipart.MultipartFile;
 

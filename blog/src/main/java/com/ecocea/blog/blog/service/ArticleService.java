@@ -13,6 +13,7 @@ public interface ArticleService {
 	public java.util.List<Article> ListAll();
 	public void deleteArticle(Long articleId);
 	public java.util.List<Article> ListArticleByCategory_Id(Long id);
+	public java.util.List<Article> ListArticleByTag(String tag);
 	public java.util.List<Article> ListArticleTitle(String name);
 	public java.util.List<Article> ListArticleByTitleContainsOrTextContains(String title, String text);
 

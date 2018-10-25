@@ -74,7 +74,7 @@
 
 
 				<div class="row">
-					<th:block th:each="art : ${articles}">
+					<th:block th:each="art : ${article}">
 
 						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 							
@@ -122,24 +122,6 @@
 				</div>
 			</div>
 			
-			<!-- <div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas"
-				id="sidebar">
-				<div class="list-group">
-					<div class="list-group-item active">
-						<div th:if="${not #lists.isEmpty(category)}">
-						<select id="art_choice" th:field="*{category.id}" class="style_select" onblur="employeeSelect()" >
-							<option class="style_select"  th:each="cat : ${categories}" th:value="${cat.id}" th:name="name" th:text="${cat.name}"></option>
-						</select>
-						</div>
-					
-					</div>
-					<th:block th:each="art_cat_choice : ${article_cat_choice}">
-						<a class="list-group-item"
-							th:href="@{'/affifArticleIndex?id=' + ${art_cat_choice.id}}"
-							th:text="${art_cat_choice.title}"></a>
-					</th:block>
-				</div>
-			</div> -->
 
 		</div>
 
@@ -155,38 +137,7 @@
 		});
 	});
 	
-	/*function employeeSelect() {
-		   //display the spinner
-		   $('#ajaxLoader').show();
-		 
-		   //first, let's get rid of the default "SELECT" option if it exists
-		   var defaultOption = $("#art_choice option[value='default']");
-		   if (defaultOption) defaultOption.remove();
-		 
-		   //get the selected id
-		   var employeeId = $('#art_choice').val();
-		 
-		   //get the url for the ajax call
-		   var url = "./index/" + employeeId;
-		 
-		   //do the ajax call
-		   $.get(url, populateEmployeeInfo);
-		}
-	function populateEmployeeInfo(data) {
-		var status = data.responseStatus;
-		
-		//check the response to make sure it's ok
-		if (status == "Ok") {
-			var response = data.response;
-			alert("ok");
-		}
-		if (status == "Not found") {
-			var response = data.response;
-			alert("not found");
-		}
-	}*/
-	
-	
+
 </script>
 
 </html>

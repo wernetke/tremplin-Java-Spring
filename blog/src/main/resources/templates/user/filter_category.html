@@ -70,24 +70,36 @@
 
 			<div class="row">
 			<th:block th:each="art : ${articles}">
-						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-						
-								<div class="style_div_title" th:text="${art.tag}+ ' ' + ${art.category.name}"></div>
-								<h1 style="text-align:center; font-size:3em; font-weight:bold;"th:text="${art.title}" /></h1> <br/>
-										<div align="center">
-											<img  th:src="${art.url}" width="300" style="padding:15px"><br/> 
-										</div>
-										
-									
-										<h2 style="text-align:center; font-size:1.5em;"th:text="${art.text}" /></h2> <br/>
-									
-										<div align="center">
-										<a class="btn btn-primary"th:href="@{'/affifArticleIndex?id=' + ${art.id}}">Display</a> 
-										</div>
-										
-												</div>
-										
-						</th:block>
+
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							
+							<div class="surtitre article__surtitre">
+
+									<span class="skew  skew--right   " th:text="${art.category.name}"> </span> 
+															<a th:href="@{'/afficheArticleByTag?tag=' + ${art.tag}}">
+									<span class="skew skew--darkgrey " th:text="${art.tag}"></span></a>
+							</div>
+						<div class="style_index">
+						<a th:href="@{'/affifArticleIndex?id=' + ${art.id}}">
+							<div align="center">
+								<img th:src="${art.url}" width="100%" style="padding: 15px">
+							</div>
+							
+							<h1 th:text="${art.title}" /></h1>
+							
+
+
+							<h2 th:text="${art.text}" /></h2>
+
+
+							<div th:name="id" th:value="${art.id}" th:type="hidden"></div>
+
+
+								</a>
+
+						</div>
+						</div>
+					</th:block>
 			</div>
 		</div>
 

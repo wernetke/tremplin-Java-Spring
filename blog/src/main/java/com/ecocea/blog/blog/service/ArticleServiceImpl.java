@@ -63,6 +63,13 @@ public class ArticleServiceImpl implements ArticleService{
 		articleRepository.findByTitleContainsOrTextContains(title,text).forEach(e -> article.add(e));
 		return article;
 	}
+	
+	@Override
+	public java.util.List<Article> ListArticleByTag(String tag){
+		java.util.List<Article> article = new ArrayList<>();
+		articleRepository.findByTag(tag).forEach(e -> article.add(e));
+		return article;
+	}
 
 	
 	

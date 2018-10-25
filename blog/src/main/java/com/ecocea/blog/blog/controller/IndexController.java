@@ -1,35 +1,33 @@
 package com.ecocea.blog.blog.controller;
 
-import java.io.File;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.UUID;
 
 import com.ecocea.blog.blog.entity.User;
 import com.ecocea.blog.blog.entity.Article;
 import com.ecocea.blog.blog.entity.Category;
+import com.ecocea.blog.blog.entity.RestResponse;
 import com.ecocea.blog.blog.entity.Commentary;
 import com.ecocea.blog.blog.service.CategoryService;
 import com.ecocea.blog.blog.service.CommentaryService;
 import com.ecocea.blog.blog.service.ArticleService;
 import com.ecocea.blog.blog.service.UserService;
+import com.ecocea.blog.blog.service.EmailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.mail.SimpleMailMessage;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,23 +36,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
+import org.springframework.mail.javamail.JavaMailSender;
 
 
+
+import java.util.Map;
+
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class IndexController {
@@ -63,8 +58,16 @@ public class IndexController {
 	
     private static final DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-
-
+    
+    public static final String NOT_FOUND = "Not found";
+    public static final String OK = "Ok";
+     
+    private String responseStatus;
+    private Object response;    
+    
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
+    
 
 	@Autowired
 	private UserService userService;
@@ -77,6 +80,9 @@ public class IndexController {
 	
 	@Autowired
 	private CommentaryService commentaryService;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -115,7 +121,7 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
@@ -129,7 +135,33 @@ public class IndexController {
 			if (bindingResult.hasErrors()) {
 				modelAndView.setViewName("registration");
 			} else {
+				 /*try {
+				        String appUrl = request.getContextPath();
+				        User registered = userService.registerNewUserAccount(user);
+				        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
+				          
+				    } catch (Exception me) {
+				        return new ModelAndView("emailError", "user", user);
+				    }*/
+				user.setActive(false);
+			    user.setConfirmationToken(UUID.randomUUID().toString());			   
 				userService.saveUser(user);
+				//String appUrl = request.getScheme() + "://" + request.getServerName();
+				String appUrl ="http://localhost:8080";
+				SimpleMailMessage registrationEmail = new SimpleMailMessage();
+				registrationEmail.setTo(user.getEmail());
+				registrationEmail.setSubject("Registration Confirmation");
+				registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
+						+ appUrl + "/confirm?token=" + user.getConfirmationToken());
+				registrationEmail.setFrom("nonet21@gmail.com");
+				
+				emailService.sendEmail(registrationEmail);
+		        //new SendingMailThroughGmailSMTPServer().sendMail(SMTP_SERVER_HOST, SMTP_SERVER_PORT,SMTP_USER_NAME, SMTP_TOKEN, "kvn.wernet@gmail.com", "wernet", user.getEmail(), "Registration Confirmation", "To confirm your e-mail address, please click the link below:\n"+ appUrl + "/confirm?token=" + user.getConfirmationToken());
+
+				
+				
+				modelAndView.addObject("confirmationMessage", "A confirmation e-mail has been sent to " + user.getEmail());
+				modelAndView.setViewName("register");
 				modelAndView.addObject("successMessage", "User has been registered successfully");
 				modelAndView.addObject("user", new User());
 				modelAndView.setViewName("registration");
@@ -137,18 +169,43 @@ public class IndexController {
 		}
 		return modelAndView;
 	}
+	
+	
+	// Process confirmation link
+		@RequestMapping(value="/confirm", method = RequestMethod.GET)
+		public ModelAndView confirmRegistration(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
+					
+			modelAndView.setViewName("confirm");					
+
+			// Find the user associated with the reset token
+			User user = userService.findByConfirmationToken(requestParams.get("token"));
+
+
+			// Set user to enabled
+			user.setActive(true);
+			
+			// Save user
+			userService.updateUser(user);
+			
+			modelAndView.addObject("successMessage", "Your account has been Actived!");
+			Article article = new Article();
+			Category category = new Category();
+			modelAndView.addObject("article", article);
+			modelAndView.addObject("category", category);
+			modelAndView.addObject("categories", categoryService.ListAll());
+			modelAndView.addObject("articles", articleService.ListAll());
+			return modelAndView;		
+		}
+	
+	
+	
+	
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView home_index() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		/*
-		 * modelAndView.addObject("userName", "Welcome " + user.getName() + " " +
-		 * user.getLastName() + " (" + user.getEmail() + ")");
-		 * modelAndView.addObject("adminMessage",
-		 * "Content Available Only for Users with Admin Role");
-		 */
 		Article article = new Article();
 		Category category = new Category();
 		modelAndView.addObject("article", article);
@@ -410,7 +467,6 @@ public class IndexController {
 	@RequestMapping(value = "/affifArticleIndex", method = RequestMethod.GET)
 	public ModelAndView affiInfofArticle(@ModelAttribute Article article, @ModelAttribute Category category,@ModelAttribute Commentary comment,
 			@RequestParam(value = "id") Long id, Model model) {
-
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("article", article);
 		modelAndView.addObject("category", category);
@@ -433,7 +489,6 @@ public class IndexController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User author = new User();
 		author = userService.findUserByEmail(auth.getName());
-
 		if(Comment.getDescription().isEmpty())
 		{
 			modelAndView.addObject("successMessage", "Commentary is empty");
@@ -534,5 +589,55 @@ public class IndexController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/index/{employeeId}")
+    public RestResponse singleEmployee(@PathVariable Long employeeId) {
+        //instantiate the response object
+        RestResponse response = new RestResponse();
+    	System.out.println("deux");
+
+        //set the employee to null
+        Article returnedArticle = null;
+         
+        //grab all employees
+        List<Article> allArticle = articleService.ListAll();
+         
+        //look for a match
+        for (Article article : allArticle) {
+            if (article.getId().equals(employeeId)) {
+            	returnedArticle = article;
+                break;
+            }
+        }
+         
+        if (returnedArticle == null) {
+        	System.out.println("voir");
+
+            //the URL contains an unknown employee id - we'll return an empty response
+            response.setResponseStatus(RestResponse.NOT_FOUND);
+            response.setResponse("");
+        } else {
+            //good response if we get here
+        	System.out.println("bonjour");
+            response.setResponseStatus(RestResponse.OK);
+            response.setResponse(returnedArticle);
+        }
+         
+        return response;
+    }
+	
+	
+	@RequestMapping(value = "/afficheArticleByTag", method = RequestMethod.GET)
+	public ModelAndView afficheartbytag(@ModelAttribute Article article, @ModelAttribute Category category,
+			@RequestParam(value = "tag") String tag, Model model) {
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("article", article);
+		modelAndView.addObject("category", category);
+		modelAndView.addObject("categories", categoryService.ListAll());
+		modelAndView.addObject("article", articleService.ListArticleByTag(tag));
+		modelAndView.setViewName("/user/article_page_tag");
+		return modelAndView;
+
+	}
 	
 }

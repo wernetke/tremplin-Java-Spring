@@ -47,3 +47,4 @@ public class BlogApplication  extends SpringBootServletInitializer {
 	}
 
 }
+

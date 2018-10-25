@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Transient;
 
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -40,10 +41,34 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 	@Column(name = "active")
-	private int active;
+	private boolean active;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+	private Collection<Role> roles;
+	
+	 public Collection<Role> getRoles() {
+	        return roles;
+	    }
+
+	    public void setRoles(final Collection<Role> roles) {
+	        this.roles = roles;
+	    }
+
+	    @Column(name = "confirmation_token")
+		private String confirmationToken;
+
+		public String getConfirmationToken() {
+			return confirmationToken;
+		}
+
+		public void setConfirmationToken(String confirmationToken) {
+			this.confirmationToken = confirmationToken;
+		}
+	    
+	public User() {
+	        super();
+	        this.active=false;
+	    }
 	
 	 
 	public int getId() {
@@ -86,21 +111,15 @@ public class User {
 		this.email = email;
 	}
 
-	public int getActive() {
+	public boolean isActive() {
 		return active;
 	}
 
-	public void setActive(int active) {
+
+	public void setActive(boolean active) {
 		this.active = active;
 	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
+	
 	public String getPseudo() {
 		return pseudo;
 	}

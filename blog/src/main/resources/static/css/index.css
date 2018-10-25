@@ -101,26 +101,69 @@ footer {
     padding-right: 16px;
     background-color: #202020;
     color: #fff;
-    font-family: DIN-EQP-MediumCond;
     font-size: 22px;
     line-height: 41px;
     font-weight: 400;
     padding-left: 4px;
 }
 .surtitre .skew {
-    font-family: DIN-EQP-MediumCond;
+
     font-size: 18px;
     line-height: 23px;
     font-weight: 400;
     padding: 4px 16px 1px 12px;
     height: auto;
-}
-.skew+.skew {
-    margin-left: 8px;
-    padding-left: 3px;
+    border-radius:5px;
 }
 
 .skew--darkgrey {
     background-color: gray;
     color: #fff;
+}
+.style_index h1
+{
+	font-weight:bold;
+	font-size:3em;
+	text-align:center;
+}	
+.style_index h2
+{
+	font-size:2em;
+	text-align:center;
+}	
+
+.style_index a{
+	text-decoration:none;
+	color:black;
+}
+.style_index a:hover{
+	text-decoration:none;
+	color:black;
+}
+
+.style_a_admin{
+		text-align:left;
+		font-size: 18px;
+	    line-height: 23px;
+	    font-weight: 400;
+	    padding: 4px 16px 1px 12px;
+	    height: auto;
+	    border-radius:5px;
+	     background-color: #337ab7;
+	    color: #fff;
+	      display: inline-block;
+	    position: relative;
+	    z-index: 1;
+	    padding-right: 16px;
+	    padding-left: 4px;
+	
+}
+.style_a_admin a{
+	border:1px 1px 1px blue;
+	text-decoration:none;
+	color:black;
+}
+.style_a_admin a:hover{
+	text-decoration:none;
+	color:black;
 }
